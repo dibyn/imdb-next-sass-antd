@@ -10,7 +10,6 @@ import NProgress from 'nprogress';
 import Layout from 'components/Layout';
 import { LocaleProvider } from 'antd';
 import 'styles/styles.scss';
-// import 'styles/theme.less';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -31,7 +30,7 @@ class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>Lava X | NextJS with Ant Design Starter</title>
+          <title>{'Movie time'}</title>
         </Head>
         <Provider store={store}>
           <LocaleProvider>

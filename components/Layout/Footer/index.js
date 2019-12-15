@@ -7,7 +7,7 @@ export default class LayoutFooter extends PureComponent {
     return (
       <Layout>
         <Footer style={{ textAlign: 'center' }}>
-          NextJs with Ant Design Starter ©2018 Created by Lava X
+          {/* NextJs with Ant Design Starter ©2018 Created by Lava X */}
         </Footer>
       </Layout>
     );
