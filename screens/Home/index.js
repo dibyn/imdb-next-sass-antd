@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Button, Radio, Icon } from 'antd';
+import { connect } from 'react-redux';
+import { fetchMoviesList } from './../../store/Actions/omdb';
 import styles from './styles';
 
-export default class Home extends PureComponent {
+export class Home extends PureComponent {
   state = {
     size: 'large',
   };
@@ -11,6 +13,9 @@ export default class Home extends PureComponent {
   handleSizeChange = (e) => {
     this.setState({ size: e.target.value });
   };
+  componentDidMount() {
+    this.props.fetchMoviesList();
+  }
 
   // ====================== RENDER
   render() {
@@ -23,3 +28,9 @@ export default class Home extends PureComponent {
     );
   }
 }
+
+export default connect(
+  null,
+  { fetchMoviesList },
+  null
+)(Home);

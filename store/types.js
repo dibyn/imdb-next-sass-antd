@@ -1,0 +1,1 @@
+export const IMDB_MOVIES_LIST = 'IMDB_MOVIES_LIST'
