@@ -4,10 +4,6 @@ class omdbApi {
     const response = await Axios({
       method: 'GET',
       url: url,
-      withCredentials: true,
-      validateStatus: function(status) {
-        return status >= 200 && status < 401; // default
-      },
     });
     return response;
   }
@@ -15,10 +11,6 @@ class omdbApi {
     const response = await Axios({
       method: 'GET',
       url: url,
-      withCredentials: true,
-      validateStatus: function(status) {
-        return status >= 200 && status < 401; // default
-      },
     });
     return response;
   }

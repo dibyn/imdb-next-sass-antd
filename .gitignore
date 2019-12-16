@@ -46,3 +46,4 @@ dist
 .yarn.lock
 .package-lock.json
 .env
+yarn-error.log
