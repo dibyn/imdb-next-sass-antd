@@ -43,7 +43,7 @@ jspm_packages
 out
 dist
 
-.yarn.lock
-.package-lock.json
+yarn.lock
+package-lock.json
 .env
 yarn-error.log
