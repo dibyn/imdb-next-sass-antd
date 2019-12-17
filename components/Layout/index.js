@@ -33,7 +33,7 @@ class Layout extends Component {
       <AntLayout>
         <Header />
         <div className="section">{this.props.children}</div>
-        <Footer />
+        {/* <Footer /> */}
       </AntLayout>
     );
   }

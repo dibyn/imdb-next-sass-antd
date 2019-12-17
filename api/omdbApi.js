@@ -1,9 +1,11 @@
 import Axios from 'axios';
+const apiKey = '5278dfea';
+const apiUrl = 'http://www.omdbapi.com';
 class omdbApi {
-  static async listMovies(url) {
+  static async listMovies(movieId) {
     const response = await Axios({
       method: 'GET',
-      url: url,
+      url: `http://www.omdbapi.com/?apikey=${apiKey}&i=${movieId}&plot=full`,
     });
     return response;
   }

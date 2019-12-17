@@ -1,7 +1,7 @@
 {
-  "name": "next-antd-with-redux",
+  "name": "imdb",
   "version": "1.0.0",
-  "description": "NextJs with ant design framework, redux, redux thunk, selectors,immutableJs",
+  "description": "",
   "license": "MIT",
   "scripts": {
     "dev": "next",
