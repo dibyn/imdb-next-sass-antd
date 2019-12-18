@@ -19,7 +19,9 @@ export class Home extends PureComponent {
     this.setState({ size: e.target.value });
   };
   async componentDidMount() {
-    moviesListById.map(async (val, i) => await this.props.fetchMoviesList(val, i));
+    moviesListById.map(
+      async (val, i) => await this.props.fetchMoviesList(val, i)
+    );
   }
 
   render() {

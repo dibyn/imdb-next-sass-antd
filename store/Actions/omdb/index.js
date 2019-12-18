@@ -2,23 +2,26 @@ import { IMDB_MOVIES_LIST } from './../../types';
 import _ from 'underscore';
 import { message } from 'antd';
 import omdbApi from './../../../api/omdbApi';
-export const imdbMoviesList = (data) => {
+export const imdbMoviesList = (data, valName) => {
   return {
     type: IMDB_MOVIES_LIST,
-    payload: data,
+    data,
+    valName,
   };
 };
-let count = 0;
-export const fetchMoviesList = (movieId, indx) => async (dispatch, getState) => {
-  count++;
+let count = 1;
+export const fetchMoviesList = (movieId, indx) => async (
+  dispatch,
+  getState
+) => {
   let omdbData = { ...getState().omdbReducer };
   return omdbApi
     .listMovies(movieId)
     .then(async (res) => {
       if (res.status === 200) {
         let data = await res.data;
-        omdbData[`moviesList_${indx}`] = data;
-        await dispatch(imdbMoviesList(omdbData));
+        omdbData[`moviesList_${indx + count}`] = data;
+        await dispatch(imdbMoviesList(omdbData, `moviesList_${indx + count}`));
         return res;
       } else {
         res.data && res.data.error
