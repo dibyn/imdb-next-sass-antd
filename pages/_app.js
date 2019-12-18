@@ -8,7 +8,7 @@ import Router, { withRouter } from 'next/router';
 import createStore from 'store';
 import NProgress from 'nprogress';
 import Layout from 'components/Layout';
-import { LocaleProvider } from 'antd';
+import { ConfigProvider } from 'antd';
 import 'styles/styles.scss';
 
 Router.onRouteChangeStart = () => NProgress.start();
@@ -33,11 +33,11 @@ class MyApp extends App {
           <title>{'Movie time'}</title>
         </Head>
         <Provider store={store}>
-          <LocaleProvider>
+          <ConfigProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </LocaleProvider>
+          </ConfigProvider>
         </Provider>
       </Container>
     );
@@ -45,7 +45,4 @@ class MyApp extends App {
 }
 
 // withRouter(MyApp);
-export default withRedux(createStore, {
-  serializeState: (state) => state.toJS(),
-  deserializeState: (state) => fromJS(state),
-})(MyApp);
+export default withRedux(createStore)(MyApp);

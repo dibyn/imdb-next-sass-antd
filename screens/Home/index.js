@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Descriptions, Badge } from 'antd';
 import { connect } from 'react-redux';
 import { fetchMoviesList } from './../../store/Actions/omdb';
 import styles from './styles';
+import _ from 'underscore';
+const { Meta } = Card;
 const moviesListById = [
   'tt7975244',
   'tt0111161',
@@ -25,29 +27,52 @@ export class Home extends PureComponent {
   }
 
   render() {
+    const { moviesList_1, movieList } = this.props;
     return (
       <div style={{ background: '#fff', padding: '30px' }}>
-        <Row gutter={16}>
-          <Col span={6}>
-            <Card title="Card title" bordered={true}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card title="Card title" bordered={true}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card title="Card title" bordered={true}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card title="Card title" bordered={true}>
-              Card content
-            </Card>
-          </Col>
+        <Row gutter={0}>
+          {movieList
+            ? movieList.Search.map((val, indx) => {
+                return (
+                  <Col key={indx} span={8}>
+                    <Card
+                      hoverable
+                      style={{ width: 240, margin: '5px' }}
+                      cover={
+                        <img
+                          alt={val.title}
+                          onError={(e) => {
+                            e.target.onError = null;
+                            e.target.src =
+                              'https://via.placeholder.com/300/ebebeb/525252?text=Image Not Found';
+                          }}
+                          src={val.Poster}
+                        />
+                      }
+                    >
+                      <Meta
+                        title={val.Title}
+                        description={
+                          <span>
+                            Year: {val.year} | Type: {val.Type}
+                          </span>
+                        }
+                      />
+                    </Card>
+                  </Col>
+                );
+              })
+            : moviesList_1 && (
+                <Descriptions title={moviesList_1.Title} bordered>
+                  {_.map(moviesList_1, (val, key) => {
+                    return (
+                      <Descriptions.Item key={key} label={key}>
+                        {typeof val === 'string' && val}
+                      </Descriptions.Item>
+                    );
+                  })}
+                </Descriptions>
+              )}
         </Row>
       </div>
     );
@@ -56,6 +81,8 @@ export class Home extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     omdbReducer: state.omdbReducer,
+    movieList: state.omdbReducer.movieList,
+    moviesList_1: state.omdbReducer.moviesList_1,
   };
 };
 

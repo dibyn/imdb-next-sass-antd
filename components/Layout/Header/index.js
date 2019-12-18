@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
 import { Layout, Input } from 'antd';
-import Link from 'next/link';
 import styles from './styles';
+import { connect } from 'react-redux';
 const { Search } = Input;
 const { Header } = Layout;
-
-class LayoutHeader extends Component {
+import { searchMovies } from 'store/Actions/omdb';
+class LayoutHeader extends React.Component {
+  handleSearch = async (val) => {
+    val.length >= 1 && await this.props.searchMovies(val);
+  };
   render() {
     return (
       <React.Fragment>
         <Layout>
           <Header className="header">
             <Search
-              placeholder="input search text"
-              onSearch={(value) => console.log(value)}
+              placeholder="Search movies"
+              onSearch={(value) => this.handleSearch(value)}
               style={{ width: 200 }}
             />
           </Header>
@@ -23,5 +25,4 @@ class LayoutHeader extends Component {
     );
   }
 }
-
-export default LayoutHeader;
+export default connect(null, { searchMovies }, null)(LayoutHeader);

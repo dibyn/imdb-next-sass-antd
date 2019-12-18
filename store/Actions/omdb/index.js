@@ -40,6 +40,34 @@ export const fetchMoviesList = (movieId, indx) => async (
       }
     });
 };
+export const searchMovies = (searchVal) => async (dispatch, getState) => {
+  let omdbData = { ...getState().omdbReducer };
+  return omdbApi
+    .searchMovies(searchVal)
+    .then(async (res) => {
+      console.log(res, 'res');
+      if (res.status === 200) {
+        let data = await res.data;
+        omdbData[`movieList`] = data;
+        await dispatch(imdbMoviesList(omdbData, `movieList`));
+        return res;
+      } else {
+        res.data && res.data.error
+          ? message.info(res.data.error.message)
+          : message.info('Something went wrong, please try again later');
+        omdbData.moviesList = res.data.error.message;
+        await dispatch(imdbMoviesList(omdbData));
+        return;
+      }
+    })
+    .catch((error) => {
+      if (error.response && error.response.data && error.response.data.error) {
+        message.error(error.response.data.error.message);
+      } else {
+        message.error('Request to fetch data failed');
+      }
+    });
+};
 
 export const loader = (bool) => (dispatch, getState) => {
   let omdbData = { ...getState().omdbReducer };

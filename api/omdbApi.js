@@ -9,10 +9,10 @@ class omdbApi {
     });
     return response;
   }
-  static async searchMovies(url) {
+  static async searchMovies(searchVal) {
     const response = await Axios({
       method: 'GET',
-      url: url,
+      url: `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchVal}&plot=full`,
     });
     return response;
   }
