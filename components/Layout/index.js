@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import Header from 'components/Layout/Header';
-import Footer from 'components/Layout/Footer';
 import { Layout as AntLayout } from 'antd';
 
 class Layout extends Component {
@@ -33,7 +32,6 @@ class Layout extends Component {
       <AntLayout>
         <Header />
         <div className="section">{this.props.children}</div>
-        {/* <Footer /> */}
       </AntLayout>
     );
   }

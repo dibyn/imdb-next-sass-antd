@@ -3,10 +3,13 @@ import styles from './styles';
 import { connect } from 'react-redux';
 const { Search } = Input;
 const { Header } = Layout;
-import { searchMovies } from 'store/Actions/omdb';
+import { searchMovies, fetchMoviesList } from 'store/Actions/omdb';
 class LayoutHeader extends React.Component {
-  handleSearch = async (val) => {
-    val.length >= 1 && await this.props.searchMovies(val);
+  handleSearch = async (val, id) => {
+    const searchVal = id === 'onChange' ? val.target.value : val;
+    searchVal.length >= 1
+      ? await this.props.searchMovies(searchVal)
+      : searchVal.length === 0 && (await this.props.fetchMoviesList('tt0108052', 0));
   };
   render() {
     return (
@@ -15,7 +18,8 @@ class LayoutHeader extends React.Component {
           <Header className="header">
             <Search
               placeholder="Search movies"
-              onSearch={(value) => this.handleSearch(value)}
+              onChange={(e) => e.target.value.length === 0 && this.handleSearch(e, 'onChange')}
+              onSearch={(value) => this.handleSearch(value, 'onSearch')}
               style={{ width: 200 }}
             />
           </Header>
@@ -25,4 +29,8 @@ class LayoutHeader extends React.Component {
     );
   }
 }
-export default connect(null, { searchMovies }, null)(LayoutHeader);
+export default connect(
+  null,
+  { searchMovies, fetchMoviesList },
+  null
+)(LayoutHeader);

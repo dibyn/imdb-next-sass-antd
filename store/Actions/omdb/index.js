@@ -45,11 +45,12 @@ export const searchMovies = (searchVal) => async (dispatch, getState) => {
   return omdbApi
     .searchMovies(searchVal)
     .then(async (res) => {
-      console.log(res, 'res');
       if (res.status === 200) {
         let data = await res.data;
         omdbData[`movieList`] = data;
+        delete omdbData['moviesList_1'];
         await dispatch(imdbMoviesList(omdbData, `movieList`));
+        await dispatch(imdbMoviesList(omdbData, `moviesList_1`));
         return res;
       } else {
         res.data && res.data.error
