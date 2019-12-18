@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "ur-app-name",
-  "alias": "ur-alias",
+  "name": "imdb4movies",
   "builds": [{ "src": "package.json", "use": "@now/static-build" }]
 }

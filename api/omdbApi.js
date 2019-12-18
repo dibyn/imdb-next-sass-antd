@@ -1,6 +1,6 @@
 import Axios from 'axios';
 const apiKey = '5278dfea';
-const apiUrl = 'http://www.omdbapi.com';
+const apiUrl = 'https://www.omdbapi.com';
 class omdbApi {
   static async listMovies(movieId) {
     const response = await Axios({
