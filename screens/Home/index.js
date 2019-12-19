@@ -84,7 +84,9 @@ export class Home extends PureComponent {
             </React.Fragment>
           ) : (
             movieList &&
-            movieList.Search.map((val, indx) => {
+            movieList.Search.sort((p, n) => {
+              return p.Year - n.Year;
+            }).map((val, indx) => {
               return (
                 <Col key={indx} span={8}>
                   <Card
