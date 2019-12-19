@@ -9,7 +9,8 @@ class LayoutHeader extends React.Component {
     const searchVal = id === 'onChange' ? val.target.value : val;
     searchVal.length >= 1
       ? await this.props.searchMovies(searchVal)
-      : searchVal.length === 0 && (await this.props.fetchMoviesList('tt0108052', 0));
+      : searchVal.length === 0 &&
+        (await this.props.fetchMoviesList('tt0108052', 0));
   };
   render() {
     return (
@@ -18,7 +19,9 @@ class LayoutHeader extends React.Component {
           <Header className="header">
             <Search
               placeholder="Search movies"
-              onChange={(e) => e.target.value.length === 0 && this.handleSearch(e, 'onChange')}
+              onChange={(e) =>
+                e.target.value.length === 0 && this.handleSearch(e, 'onChange')
+              }
               onSearch={(value) => this.handleSearch(value, 'onSearch')}
               style={{ width: 200 }}
             />

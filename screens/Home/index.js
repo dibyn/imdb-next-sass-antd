@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Card, Descriptions, Pagination } from 'antd';
+import { Row, Descriptions, Pagination } from 'antd';
 import { connect } from 'react-redux';
 import { fetchMoviesList } from './../../store/Actions/omdb';
-import styles from './styles';
 import _ from 'underscore';
-const { Meta } = Card;
+import SearchedMovies from './SearchedMovies';
 const moviesListById = [
   'tt7975244',
   'tt0111161',
@@ -88,33 +87,11 @@ export class Home extends PureComponent {
               return p.Year - n.Year;
             }).map((val, indx) => {
               return (
-                <Col key={indx} span={8}>
-                  <Card
-                    hoverable
-                    style={{ width: 240, margin: '5px' }}
-                    onClick={(e) => this.handleClick(e, val.imdbID)}
-                    cover={
-                      <img
-                        alt={val.title}
-                        onError={(e) => {
-                          e.target.onError = null;
-                          e.target.src =
-                            'https://via.placeholder.com/300/ebebeb/525252?text=Image Not Found';
-                        }}
-                        src={val.Poster}
-                      />
-                    }
-                  >
-                    <Meta
-                      title={val.Title}
-                      description={
-                        <span>
-                          Year: {val.Year} | Type: {val.Type}
-                        </span>
-                      }
-                    />
-                  </Card>
-                </Col>
+                <SearchedMovies
+                  val={val}
+                  indx={indx}
+                  handleClick={this.handleClick}
+                />
               );
             })
           )}

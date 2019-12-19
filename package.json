@@ -10,7 +10,21 @@
     "export": "next export",
     "now-build": "next build && next export -o dist",
     "deploy": "yarn now-build && now && now alias",
-    "prettier": "prettier --write '**/*.js{x,}'"
+    "prettier": "prettier --write '**/*.js{x,}'",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./setups/index.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ]
   },
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
@@ -40,8 +54,13 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.9.0",
     "babel-plugin-import": "^1.10.0",
     "babel-plugin-module-resolver": "^3.1.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
+    "jest": "^24.9.0",
     "next-compose-plugins": "^2.1.1",
     "next-images": "^0.10.6",
     "prettier": "^1.14.2",
