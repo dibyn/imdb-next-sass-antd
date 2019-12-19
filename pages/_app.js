@@ -3,7 +3,6 @@ import Head from 'next/head';
 import React from 'react';
 import withRedux from 'next-redux-wrapper';
 import { Provider } from 'react-redux';
-import { fromJS } from 'immutable';
 import Router, { withRouter } from 'next/router';
 import createStore from 'store';
 import NProgress from 'nprogress';
